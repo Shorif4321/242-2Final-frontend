@@ -12,7 +12,6 @@ const SignUp = () => {
       continueWithGoogle()
         .then(result =>{
           const user = result.user;
-          console.log(user)
            saveUser(user.displayName,user.email)
         })
         .catch(error =>{
@@ -21,20 +20,18 @@ const SignUp = () => {
     }
 
     const handleSignUp=(data)=>{
-        console.log(data);
         createUser(data.email, data.password)
         .then(result =>{
           const user = result.user;
-          console.log(user)
           const useInfo={
             displayName: data.name
           }
           updateUser(useInfo)
           .then(()=>{
-            saveUser(data.name,data.email)
             navigate('/')
           })
           .catch(error=>console.log(error))
+           saveUser(data.name,data.email)
         })
         .catch(error =>{
           console.log(error);
@@ -45,7 +42,9 @@ const SignUp = () => {
 
     const saveUser =(name,email)=>{
       const user  ={ name,email }
-      fetch("api",{
+      console.log(user);
+
+      fetch("http://localhost:3000/users",{
         method:"POST",
         headers:{
           'content-type':'application/json'
@@ -54,9 +53,8 @@ const SignUp = () => {
       })
       .then(res=>res.json())
       .then(data=>{
-        console.log(data)
         if(data.insertedId){
-          alert("Successfully Create an Account")
+          alert("Successfully account created")
         }
       })
       .catch(error=>{

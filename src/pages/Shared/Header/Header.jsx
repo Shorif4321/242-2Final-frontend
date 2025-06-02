@@ -1,13 +1,11 @@
 import React, { useContext, useState } from "react";
 import logo from "../../../assets/logo.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Header = () => {
-
-  // const {name} = useContext(AuthContext)
-
+  const { user, logOut } = useContext(AuthContext);
 
   const [color, setColor] = useState(false);
   //change color on scroll
@@ -59,23 +57,40 @@ const Header = () => {
           Contact
         </NavLink>
       </li>
-      <li>
+      {
+        user?.uid ? <li>
+        <a  onClick={logOut}
+          className={({ isActive }) =>
+            isActive
+              ? "text-teal-500 font-semibold border-b-2 border-teal-500 pb-1"
+              : "text-gray-600 hover:text-teal-500"
+          }
+         
+        >
+         Log Out
+        </a>
+      </li> : <li>
         <NavLink
           className={({ isActive }) =>
             isActive
               ? "text-teal-500 font-semibold border-b-2 border-teal-500 pb-1"
               : "text-gray-600 hover:text-teal-500"
           }
-          to="/sign-up"
+          to="/login"
         >
-          Sign Up
+          Login
         </NavLink>
       </li>
+      }
     </>
   );
 
   return (
-    <div className={`fixed top-0 left-0 right-0 z-10  navbar p-3 md:px-10 shadow-sm ${color ? "nav-basic on-scroll" : "nav-basic"}`}>
+    <div
+      className={`fixed top-0 left-0 right-0 z-10  navbar p-3 md:px-10 shadow-sm ${
+        color ? "nav-basic on-scroll" : "nav-basic"
+      }`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <div
@@ -106,9 +121,9 @@ const Header = () => {
             {menuItems}
           </ul>
         </div>
-        <a className="">
+        <Link to="/" className="">
           <img src={logo} alt="relive" />
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{menuItems}</ul>
@@ -123,27 +138,37 @@ const Header = () => {
             <div className="border-2 border-primary w-10 rounded-full">
               <img
                 alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                src={
+                  user?.uid
+                    ? user.photoURL
+                    : "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                }
               />
             </div>
           </div>
-          <ul
+          {
+            user?.uid && <ul
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
               <a className="justify-between">
-                Profile
+                {user?.displayName}
                 <span className="badge">New</span>
               </a>
             </li>
             <li>
-              <a>Settings</a>
+              <a>{user?.email}</a>
             </li>
-            <li>
-              <a>Logout</a>
-            </li>
+            {user?.uid ?  <li>
+                <a onClick={logOut}>Logout</a>
+              </li>: 
+             <li>
+                <Link to="/login">Login</Link>
+              </li>
+            }
           </ul>
+          }
         </div>
       </div>
     </div>
