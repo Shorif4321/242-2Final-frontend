@@ -40,6 +40,18 @@ const Header = () => {
               ? "text-teal-500 font-semibold border-b-2 border-teal-500 pb-1"
               : "text-gray-600 hover:text-teal-500"
           }
+          to="/services"
+        >
+          Services
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          className={({ isActive }) =>
+            isActive
+              ? "text-teal-500 font-semibold border-b-2 border-teal-500 pb-1"
+              : "text-gray-600 hover:text-teal-500"
+          }
           to="/about-us"
         >
           About Us

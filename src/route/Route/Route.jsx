@@ -6,6 +6,7 @@ import NotFound from "../../pages/Shared/NotFound/NotFound";
 import ContactPage from "../../pages/Contact/ContactPage";
 import SignUp from "../../pages/SignUp/SignUp";
 import Login from "../../pages/Login/Login";
+import Services from "../../pages/Services/Services";
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
             {
                 path:'/',
                 element:<Home></Home>
+            },
+            {
+                path:'/services',
+                element:<Services></Services>
             },
             {
                 path:'/about-us',

@@ -6,3 +6,12 @@
    --text-6xl:80px;
    --text-4xl:64px;
 }
+
+.rdp-selected .rdp-day_button {
+    border: 2px solid #00C3B9 !important;
+    color: #00C3B9 !important;
+}
+
+.rdp-chevron {
+   fill: #00C3B9 !important;
+}
