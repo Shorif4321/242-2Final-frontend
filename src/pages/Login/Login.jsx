@@ -1,9 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
+
+    useEffect(() => {
+          window.scrollTo(0, 0);
+        }, []);
+  
+
+
   const { signIn,continueWithGoogle } = useContext(AuthContext);
   const {
     handleSubmit,
@@ -16,7 +24,7 @@ const Login = () => {
       continueWithGoogle()
         .then(result =>{
           const user = result.user;
-         
+          toast.success("Successfully Login");
         })
         .catch(error =>{
           console.log(error);
@@ -29,10 +37,14 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        toast.success('Your are login Successfully!');
+        reset()
+
         
       })
       .catch((error) => {
-        console.log(error);
+        if(error.message == "Firebase: Error (auth/invalid-credential).")
+         toast.error("Email or Password does not Matched");
       });
 
     // reset()

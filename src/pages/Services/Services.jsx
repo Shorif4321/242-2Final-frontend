@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ServicesBanner from './ServicesBanner/ServicesBanner';
 import AvailableAppointments from './AvailableAppointments/AvailableAppointments';
 
 const Services = () => {
+      useEffect(() => {
+            window.scrollTo(0, 0); 
+          }, []);
+    
+
       const [selectedDate, setSelectedDate] = useState(new Date());
     return (
         <div>

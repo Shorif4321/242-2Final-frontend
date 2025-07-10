@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Banner from './Banner/Banner';
 import MeetRelive from './MeetRelive/MeetRelive';
 import Services from './Services/Services';
@@ -7,6 +7,12 @@ import Reviews from './Reviews/Reviews';
 import Contact from '../../components/Contact/Contact';
 
 const Home = () => {
+
+      useEffect(() => {
+            window.scrollTo(0, 0); // Scrolls instantly to the top
+          }, []);
+    
+
     return (
         <div>
             <Banner></Banner>

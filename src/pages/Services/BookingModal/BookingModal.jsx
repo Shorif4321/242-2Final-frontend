@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const BookingModal = ({ treatment, date, setTreatment }) => {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          alert("Your Booking is confirmed");
+          toast.success("Your Booking is confirmed");
         }
       });
 
