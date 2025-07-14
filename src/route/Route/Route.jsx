@@ -7,6 +7,11 @@ import ContactPage from "../../pages/Contact/ContactPage";
 import SignUp from "../../pages/SignUp/SignUp";
 import Login from "../../pages/Login/Login";
 import Services from "../../pages/Services/Services";
+import DashboardLayout from './../../layout/DashboardLayout/DashboardLayout';
+import MyService from "../../pages/Dashboard/MyService/MyService";
+import AllUsers from "../../pages/Dashboard/AllUsers/AllUsers";
+import AddService from "../../pages/Dashboard/AddService/AddService";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -36,6 +41,28 @@ const router = createBrowserRouter([
             {
                 path:'/login',
                 element:<Login/>
+            }
+        ]
+    },
+    {
+        path:'/dashboard',
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        children:[
+            {
+                path:'/dashboard',
+                element:<MyService></MyService>
+            },
+            {
+                path:'/dashboard/my-service',
+                element:<MyService></MyService>
+            },
+            {
+                path:'/dashboard/all-users',
+                element:<AllUsers></AllUsers>
+            },
+            {
+                path:'/dashboard/add-service',
+                element:<AddService></AddService>
             }
         ]
     },

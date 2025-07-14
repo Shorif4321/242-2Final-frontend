@@ -1,10 +1,16 @@
 import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
 import toast from "react-hot-toast";
 
+
+
 const Login = () => {
+
+  const location = useLocation()
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
     useEffect(() => {
           window.scrollTo(0, 0);
@@ -24,6 +30,7 @@ const Login = () => {
       continueWithGoogle()
         .then(result =>{
           const user = result.user;
+           navigate(from,{replace:true});
           toast.success("Successfully Login");
         })
         .catch(error =>{
@@ -37,6 +44,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from,{replace:true});
         toast.success('Your are login Successfully!');
         reset()
 
