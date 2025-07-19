@@ -43,8 +43,8 @@ const Reviews = () => {
       <div>
         <div className="grid md:grid-cols-3 gap-7 px-4 md:px-10 py-10">
         {
-            testimonials.map(testimonial=> <Review
-            key={testimonial.age}
+            testimonials.map((testimonial,i)=> <Review
+            key={i}
             testimonial={testimonial}
             ></Review>)
         }

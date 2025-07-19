@@ -1,13 +1,19 @@
+import { useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import Loading from "../../Shared/Loading/Loading";
 
 const AllUsers = () => {
-  const [users, setUsers] = useState([]);
-  useEffect(() => {
-    fetch("http://localhost:3000/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, []);
+   const {data:users=[],isLoading} = useQuery({
+    queryKey:['users'],
+    queryFn: async ()=>{
+     const res = await fetch("http://localhost:3000/users");
+     const data = await res.json();
+     return data
+    }
+  })
+
+
 
   const handleMakeAdmin = (id) => {
     // console.log('handleMakeAdmin',id);
@@ -25,6 +31,13 @@ const AllUsers = () => {
         }
       });
   };
+
+
+  if(isLoading){
+    return <Loading></Loading>
+  }
+
+
 
   return (
     <div>

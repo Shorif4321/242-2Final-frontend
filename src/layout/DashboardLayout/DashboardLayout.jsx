@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "../../pages/Shared/Header/Header";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../../hooks/useAdmin";
+import { AuthContext } from "../../contexts/AuthProvider";
 
 const DashboardLayout = () => {
+  const {user} = useContext(AuthContext);
+  const [isAdmin] = useAdmin(user?.email);
+
   return (
     <div>
       <Header></Header>
@@ -33,30 +38,34 @@ const DashboardLayout = () => {
               </NavLink>
             </li>
 
-            <li className="mt-2">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-teal-500 font-semibold border-b-2 border-teal-500 pb-1"
-                    : "text-gray-600 hover:text-teal-500"
-                }
-                to="/dashboard/all-users"
-              >
-                All Users
-              </NavLink>
-            </li>
-            <li className="mt-2">
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-teal-500 font-semibold border-b-2 border-teal-500 pb-1"
-                    : "text-gray-600 hover:text-teal-500"
-                }
-                to="/dashboard/add-service"
-              >
-               Add Service
-              </NavLink>
-            </li>
+            {isAdmin && (
+              <>
+                <li className="mt-2">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-500 font-semibold border-b-2 border-teal-500 pb-1"
+                        : "text-gray-600 hover:text-teal-500"
+                    }
+                    to="/dashboard/all-users"
+                  >
+                    All Users
+                  </NavLink>
+                </li>
+                <li className="mt-2">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-teal-500 font-semibold border-b-2 border-teal-500 pb-1"
+                        : "text-gray-600 hover:text-teal-500"
+                    }
+                    to="/dashboard/add-consultant"
+                  >
+                    Add Consultant
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

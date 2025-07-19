@@ -39,8 +39,8 @@ const Treatments = () => {
 
       <div className="grid md:grid-cols-3 gap-7 px-4 md:px-10 py-10">
         {
-            treatments.map(treatment=> <Treatment
-            key={treatment._id}
+            treatments.map((treatment,i)=> <Treatment
+            key={i}
             treatment={treatment}
             ></Treatment>)
         }

@@ -10,8 +10,10 @@ import Services from "../../pages/Services/Services";
 import DashboardLayout from './../../layout/DashboardLayout/DashboardLayout';
 import MyService from "../../pages/Dashboard/MyService/MyService";
 import AllUsers from "../../pages/Dashboard/AllUsers/AllUsers";
-import AddService from "../../pages/Dashboard/AddService/AddService";
+import AddService from "../../pages/Dashboard/AddConsultant/AddConsultant";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AdminRoute from "../AdminRoute/AdminRoute";
+import AddConsultant from "../../pages/Dashboard/AddConsultant/AddConsultant";
 
 const router = createBrowserRouter([
     {
@@ -58,11 +60,11 @@ const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/all-users',
-                element:<AllUsers></AllUsers>
+                element:<AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
-                path:'/dashboard/add-service',
-                element:<AddService></AddService>
+                path:'/dashboard/add-consultant',
+                element:<AdminRoute><AddConsultant></AddConsultant></AdminRoute>
             }
         ]
     },

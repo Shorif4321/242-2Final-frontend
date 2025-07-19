@@ -11,7 +11,7 @@ const Services = () => {
       const [selectedDate, setSelectedDate] = useState(new Date());
     return (
         <div>
-            <ServicesBanner selectedDate={selectedDate} setSelectedDate={setSelectedDate}></ServicesBanner>
+            {/* <ServicesBanner selectedDate={selectedDate} setSelectedDate={setSelectedDate}></ServicesBanner> */}
             <AvailableAppointments selectedDate={selectedDate}></AvailableAppointments>
         </div>
     );
